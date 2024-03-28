@@ -12,6 +12,7 @@ public class CityInviteRepository extends BaseRepository<CityInvite> {
     public List<CityInvite> findByCity(int cityId) {
         return (List<CityInvite>) entityManager.createQuery("SELECT p FROM CityInvite p WHERE city_id = '" + cityId + "'").getResultList();
     }
+
     public List<CityInvite> findByPlayer(int playerId) {
         return (List<CityInvite>) entityManager.createQuery("SELECT p FROM CityInvite p WHERE player_id = '" + playerId + "'").getResultList();
     }

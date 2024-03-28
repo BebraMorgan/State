@@ -4,11 +4,12 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 public abstract class PlayerCommand extends AbstractCommand {
+    protected Player player;
+
     public PlayerCommand(String command) {
         super(command);
     }
 
-    protected Player player;
     @Override
     public void execute(CommandSender sender, String[] args) {
         if (!(sender instanceof Player mcPlayer)) {
