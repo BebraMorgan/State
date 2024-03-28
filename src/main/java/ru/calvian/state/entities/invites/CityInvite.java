@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.hibernate.annotations.Where;
 import ru.calvian.state.entities.City;
 import ru.calvian.state.entities.StatePlayer;
 

@@ -1,54 +1,31 @@
 package ru.calvian.state.commands;
 
-import org.bukkit.Bukkit;
 import ru.calvian.state.commands.utils.BalanceCommand;
 import ru.calvian.state.commands.utils.PlayerCommand;
 import ru.calvian.state.entities.Balance;
-import ru.calvian.state.entities.City;
 import ru.calvian.state.entities.StatePlayer;
-import ru.calvian.state.events.player.PlayerCityJoinEvent;
-import ru.calvian.state.events.player.PlayerCityLeaveEvent;
-import ru.calvian.state.repositories.CityRepository;
 import ru.calvian.state.repositories.StatePlayerRepository;
 
 import java.util.List;
 
 public class StatePlayerCommand extends PlayerCommand {
-    public StatePlayerCommand() {
-        super("p");
-    }
-
     private final StatePlayerRepository playerRepository = new StatePlayerRepository();
-    private final CityRepository cityRepository = new CityRepository();
+
+    public StatePlayerCommand() {
+        super("player");
+    }
 
     @Override
     public void performExecute(String[] args) {
         StatePlayer statePlayer = playerRepository.findByNick(player.getName()).get(0);
         switch (args[0]) {
-            case "join" -> join(statePlayer, args);
             case "info" -> info(args[1] != null ? args[1] : player.getName());
-            case "leave" -> leave(statePlayer);
             case "bank" -> new BalanceCommand(player, statePlayer.getBalance(), args).bank();
             default -> info(player.getName());
         }
     }
 
-    private void join(StatePlayer player, String[] args) {
-        if (args.length < 2) {
-            player.getPlayer().sendMessage("Использование: /city join <город>");
-            return;
-        }
-        City city = cityRepository.findByName(args[1]).get(0);
-        if (city == null) return;
-        Bukkit.getPluginManager().callEvent(new PlayerCityJoinEvent(city, player));
-    }
-
-    private void leave(StatePlayer statePlayer) {
-        Bukkit.getPluginManager().callEvent(new PlayerCityLeaveEvent(statePlayer));
-    }
-
     private void info(String nick) {
-
         List<StatePlayer> statePlayers = playerRepository.findByNick(nick);
         if (statePlayers.isEmpty()) {
             player.sendMessage("Игрок не найден");
