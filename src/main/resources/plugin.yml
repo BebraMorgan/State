@@ -3,11 +3,11 @@ version: '${project.version}'
 main: ru.calvian.state.States
 api-version: '1.20'
 commands:
-  player:
+  p:
     description: Player command
-  city:
+  c:
     description: City command
-  state:
+  s:
     description: State command
-  alliance:
+  a:
     description: Alliance command

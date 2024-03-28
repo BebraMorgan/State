@@ -22,5 +22,4 @@ public abstract class AbstractCommand implements CommandExecutor {
         execute(sender, args);
         return true;
     }
-
 }
