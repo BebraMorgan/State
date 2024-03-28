@@ -26,7 +26,16 @@ public class BalanceCommand {
         switch (args[1]) {
             case "withdraw" -> Bukkit.getPluginManager().callEvent(new WithdrawEvent(player, balance, resource, count));
             case "deposit" -> Bukkit.getPluginManager().callEvent(new DepositEvent(player, balance, resource, count));
+            default -> info();
         }
+    }
+
+    public void info() {
+        String info = "Баланс:" + "\n" +
+                "Железо: " + balance.getIron() + "\n" +
+                "Алмазы: " + balance.getDiamonds() + "\n" +
+                "Незерит: " + balance.getNetherite() + "\n";
+        player.sendMessage(info);
     }
 
 }

@@ -38,5 +38,15 @@ public class StatePlayer {
     public Player getPlayer() {
         return Bukkit.getPlayer(nick);
     }
+
+    public State getState() {
+        if (city == null) return null;
+        return city.getState();
+    }
+
+    public Alliance getAlliance() {
+        if (getState() == null) return null;
+        return getState().getAlliance();
+    }
 }
 
