@@ -6,8 +6,10 @@ public class Messages {
 
     public static final String ONLY_PLAYERS = PREF + "Эту команду могут использовать только игроки.";
     public static final String NO_CITY = PREF + "Вы не состоите ни в одном городе!";
+    public static final String NO_STATE = PREF + "Вы не состоите ни в одном государстве!";
     public static final String CITY_JOINED = PREF + "Вы вступили в город %s";
     public static final String CITY_NOT_FOUND = PREF + "Город не найден!";
+    public static final String STATE_NOT_FOUND = PREF + "Государство не найдено!";
     public static final String CITY_NOT_INVITED = PREF + "Вы не были приглашены в %s";
     public static final String ALREADY_IN_CITY = PREF + "Вы уже состоите в городе %s";
     public static final String NOT_MAYOR = PREF + "Вы не являетесь мэром этого города!";

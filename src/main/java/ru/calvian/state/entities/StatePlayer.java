@@ -44,6 +44,19 @@ public class StatePlayer {
         return city.getState();
     }
 
+    public boolean isResident() {
+        return city != null;
+    }
+
+    public boolean isAssistant() {
+        if(!isResident()) return false;
+        return city.getAssistants().contains(this);
+    }
+
+    public boolean isMayor() {
+        if(!isResident()) return false;
+        return this == city.getMayor();
+    }
     public Alliance getAlliance() {
         if (getState() == null) return null;
         return getState().getAlliance();

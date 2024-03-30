@@ -1,5 +1,6 @@
 package ru.calvian.state.listeners;
 
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -10,12 +11,10 @@ import ru.calvian.state.entities.City;
 import ru.calvian.state.entities.StatePlayer;
 import ru.calvian.state.entities.dictionaries.DictPlayerRoles;
 import ru.calvian.state.entities.invites.CityInvite;
+import ru.calvian.state.events.city.CityDestroyEvent;
 import ru.calvian.state.events.player.PlayerCityJoinEvent;
 import ru.calvian.state.events.player.PlayerCityLeaveEvent;
-import ru.calvian.state.repositories.CityInviteRepository;
-import ru.calvian.state.repositories.CityRepository;
-import ru.calvian.state.repositories.DictPlayerRolesRepository;
-import ru.calvian.state.repositories.StatePlayerRepository;
+import ru.calvian.state.repositories.*;
 
 import java.util.List;
 
@@ -25,6 +24,7 @@ public class PlayerListener implements Listener {
     private final StatePlayerRepository playerRepository = new StatePlayerRepository();
     private final CityRepository cityRepository = new CityRepository();
     DictPlayerRolesRepository dictPlayerRolesRepository = new DictPlayerRolesRepository();
+    BalanceRepository balanceRepository = new BalanceRepository();
 
     @EventHandler
     public void onCityJoin(PlayerCityJoinEvent event) {
@@ -34,13 +34,14 @@ public class PlayerListener implements Listener {
             player.getPlayer().sendMessage(Messages.CITY_NOT_FOUND);
             return;
         }
-        CityInvite invite = inviteRepository.findByCity(event.getCity().getId()).get(0);
-        if (invite == null) {
-            player.getPlayer().sendMessage(Messages.CITY_NOT_INVITED);
-            return;
-        }
+
         if (player.getCity() != null) {
             player.getPlayer().sendMessage(String.format(Messages.ALREADY_IN_CITY, player.getCity().getName()));
+            return;
+        }
+
+        if (inviteRepository.findByCity(event.getCity().getId()).isEmpty()) {
+            player.getPlayer().sendMessage(String.format(Messages.CITY_NOT_INVITED, city.getName()));
             return;
         }
         player.setCity(city);
@@ -60,7 +61,9 @@ public class PlayerListener implements Listener {
         if (playerList.isEmpty()) {
             statePlayer.setNick(player.getName());
             statePlayer.setRole(role);
-            statePlayer.setBalance(new Balance());
+            Balance balance = new Balance();
+            balanceRepository.insert(balance);
+            statePlayer.setBalance(balance);
             playerRepository.insert(statePlayer);
         } else statePlayer = playerList.get(0);
         List<CityInvite> invites = inviteRepository.findByPlayer(statePlayer.getId());
@@ -81,6 +84,9 @@ public class PlayerListener implements Listener {
         player.setCity(null);
         playerRepository.update(player);
         cityRepository.update(city);
+        if(city.getPlayers().isEmpty()) {
+            Bukkit.getPluginManager().callEvent(new CityDestroyEvent(city));
+        }
         player.getPlayer().sendMessage(String.format(Messages.CITY_LEFT, city.getName()));
     }
 }
