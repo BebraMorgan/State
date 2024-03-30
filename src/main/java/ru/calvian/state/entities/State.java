@@ -27,6 +27,9 @@ public class State {
     @ManyToOne
     private Balance balance;
 
+    @ManyToOne
+    private StatePlayer leader;
+
     @OneToMany
     @JoinTable(name = "state_ministers",
             joinColumns = @JoinColumn(name = "state_id"),

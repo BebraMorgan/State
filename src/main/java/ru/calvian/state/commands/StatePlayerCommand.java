@@ -9,23 +9,27 @@ import ru.calvian.state.repositories.StatePlayerRepository;
 import java.util.List;
 
 public class StatePlayerCommand extends PlayerCommand {
-    private final StatePlayerRepository playerRepository = new StatePlayerRepository();
 
     public StatePlayerCommand() {
         super("player");
     }
 
     @Override
-    public void performExecute(String[] args) {
-        StatePlayer statePlayer = playerRepository.findByNick(player.getName()).get(0);
+    public void performExecute() {
+        if (args.length == 0) {
+            info(player.getName());
+            return;
+        }
         switch (args[0]) {
-            case "info" -> info(args[1] != null ? args[1] : player.getName());
-            case "bank" -> new BalanceCommand(player, statePlayer.getBalance(), args).bank();
-            default -> info(player.getName());
+            case "info", "i" -> info(args.length == 1 ? player.getName() : args[1]);
+            case "bank", "b" -> new BalanceCommand(player, statePlayer.getBalance(), args).bank();
         }
     }
 
     private void info(String nick) {
+        if(nick == null) {
+            nick = player.getName();
+        }
         List<StatePlayer> statePlayers = playerRepository.findByNick(nick);
         if (statePlayers.isEmpty()) {
             player.sendMessage("Игрок не найден");
