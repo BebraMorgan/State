@@ -4,19 +4,23 @@ import ru.totalcraftmc.statesplugin.commands.subcommands.city.*;
 import ru.totalcraftmc.statesplugin.commands.subcommands.common.Bank;
 import ru.totalcraftmc.statesplugin.commands.utils.AbstractCommand;
 
+import java.util.stream.Stream;
+
 public class CityCommand extends AbstractCommand {
     public CityCommand() {
-        super("city");
-        commands.put("create", new Create());
-        commands.put("destroy", new Destroy());
-        commands.put("rename", new Rename());
-        commands.put("assistant", new Assistant());
-        commands.put("mayor", new Mayor());
-        commands.put("invite", new Invite());
-        commands.put("kick", new Kick());
-        commands.put("leave", new Leave());
-        commands.put("join", new Join());
-        commands.put("bank", new Bank());
-        commands.put("info", new Info());
+        super("city", Stream.of(
+                new Create(),
+                new Destroy(),
+                new Rename(),
+                new Assistant(),
+                new Mayor(),
+                new Invite(),
+                new Kick(),
+                new Leave(),
+                new Join(),
+                new Bank(),
+                new Info()
+        ));
+
     }
 }

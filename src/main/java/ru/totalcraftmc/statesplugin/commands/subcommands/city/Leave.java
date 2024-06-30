@@ -19,4 +19,9 @@ public class Leave implements SubCommand, PlayerRequired, CallsEvents {
         if (args.length < 2) return;
         callEvent(new PlayerCityLeaveEvent(player));
     }
+
+    @Override
+    public String getName() {
+        return "leave";
+    }
 }

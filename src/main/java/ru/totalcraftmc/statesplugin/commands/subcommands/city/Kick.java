@@ -19,4 +19,9 @@ public class Kick implements SubCommand, PlayerRequired, CallsEvents {
         if (args.length < 2) return;
         callEvent(new CityKickEvent(args[1], player));
     }
+
+    @Override
+    public String getName() {
+        return "kick";
+    }
 }

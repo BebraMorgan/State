@@ -1,4 +1,4 @@
-package ru.totalcraftmc.statesplugin.commands.subcommands.city;
+package ru.totalcraftmc.statesplugin.commands.subcommands.alliance;
 
 import ru.totalcraftmc.statesplugin.commands.utils.SubCommand;
 

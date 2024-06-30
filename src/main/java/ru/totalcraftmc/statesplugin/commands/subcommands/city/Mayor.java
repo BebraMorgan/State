@@ -35,4 +35,9 @@ public class Mayor implements SubCommand, CallsEvents, PlayerRequired {
             callEvent(new MayorSetEvent(player, args[2]));
         }
     }
+
+    @Override
+    public String getName() {
+        return "mayor";
+    }
 }

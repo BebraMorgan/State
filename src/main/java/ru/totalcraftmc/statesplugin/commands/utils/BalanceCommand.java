@@ -22,6 +22,11 @@ public class BalanceCommand implements SubCommand, PlayerRequired, BalanceRequir
     }
 
     @Override
+    public String getName() {
+        return "bank";
+    }
+
+    @Override
     public void setPlayer(Player player) {
         this.player = player;
     }

@@ -57,4 +57,9 @@ public class Info implements SubCommand, PlayerRequired {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    @Override
+    public String getName() {
+        return "info";
+    }
 }

@@ -33,4 +33,9 @@ public class Bank implements SubCommand, PlayerRequired, CallsEvents, BalanceReq
     public void setBalance(Balance balance) {
         this.balance = balance;
     }
+
+    @Override
+    public String getName() {
+        return "bank";
+    }
 }

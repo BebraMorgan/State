@@ -10,17 +10,19 @@ import ru.totalcraftmc.statesplugin.StatesPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Stream;
 
 public abstract class AbstractCommand implements CommandExecutor, ExecuteModified {
 
 
     protected Map<String, SubCommand> commands = new HashMap<>();
 
-    public AbstractCommand(String command) {
+    public AbstractCommand(String command, Stream<SubCommand> commandsStream) {
         PluginCommand pluginCommand = StatesPlugin.getInstance().getCommand(command);
         if (pluginCommand != null) {
             pluginCommand.setExecutor(this);
         }
+        commandsStream.forEach(subCommand -> commands.put(subCommand.getName(), subCommand));
     }
 
     public void execute(CommandSender sender, String[] args) {

@@ -33,6 +33,11 @@ public class Assistant implements SubCommand, PlayerRequired, CallsEvents {
     }
 
     @Override
+    public String getName() {
+        return "assistant";
+    }
+
+    @Override
     public void setPlayer(Player player) {
         this.player = player;
     }

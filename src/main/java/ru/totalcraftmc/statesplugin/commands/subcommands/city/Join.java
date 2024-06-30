@@ -18,4 +18,9 @@ public class Join implements SubCommand, PlayerRequired, CallsEvents {
     public void execute(String[] args) {
         callEvent(new PlayerCityJoinEvent(args[1], player));
     }
+
+    @Override
+    public String getName() {
+        return "join";
+    }
 }

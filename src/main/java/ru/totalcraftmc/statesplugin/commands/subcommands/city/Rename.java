@@ -19,4 +19,9 @@ public class Rename implements SubCommand, PlayerRequired, CallsEvents {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    @Override
+    public String getName() {
+        return "rename";
+    }
 }

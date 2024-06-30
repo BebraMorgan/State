@@ -18,4 +18,11 @@ public class Create implements SubCommand, PlayerRequired, CallsEvents {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    @Override
+    public String getName() {
+        return "create";
+    }
+
+
 }

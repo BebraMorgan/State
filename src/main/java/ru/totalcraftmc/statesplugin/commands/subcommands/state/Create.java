@@ -1,13 +1,12 @@
-package ru.totalcraftmc.statesplugin.commands.subcommands.city;
+package ru.totalcraftmc.statesplugin.commands.subcommands.state;
 
 import org.bukkit.entity.Player;
 import ru.totalcraftmc.statesplugin.commands.utils.CallsEvents;
 import ru.totalcraftmc.statesplugin.commands.utils.PlayerRequired;
 import ru.totalcraftmc.statesplugin.commands.utils.SubCommand;
-import ru.totalcraftmc.statesplugin.events.city.CityDestroyEvent;
+import ru.totalcraftmc.statesplugin.events.state.StateCreateEvent;
 
-public class Destroy implements SubCommand, PlayerRequired, CallsEvents {
-
+public class Create implements SubCommand, PlayerRequired, CallsEvents {
     private Player player;
 
     @Override
@@ -17,11 +16,11 @@ public class Destroy implements SubCommand, PlayerRequired, CallsEvents {
 
     @Override
     public void execute(String[] args) {
-        callEvent(new CityDestroyEvent(player));
+        callEvent(new StateCreateEvent(args[1], player));
     }
 
     @Override
     public String getName() {
-        return "destroy";
+        return "create";
     }
 }

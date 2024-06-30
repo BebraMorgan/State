@@ -19,4 +19,9 @@ public class Invite implements SubCommand, PlayerRequired, CallsEvents {
         if (args.length < 2) return;
         callEvent(new CityInviteEvent(args[1], player));
     }
+
+    @Override
+    public String getName() {
+        return "invite";
+    }
 }
