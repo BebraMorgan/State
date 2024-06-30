@@ -27,8 +27,6 @@ public class PlayerListener implements Listener {
             statePlayer.setBalance(balance);
             playerDAO.insert(statePlayer);
         }
-        ;
-
     }
 
 }

@@ -19,7 +19,7 @@ public final class StatesPlugin extends JavaPlugin implements Listener {
     private static StatesPlugin instance;
 
     @Getter
-    private static EntityManager entityManager = new HibernatePersistenceProvider()
+    private static final EntityManager entityManager = new HibernatePersistenceProvider()
             .createEntityManagerFactory("persistence", Collections.emptyMap()).createEntityManager();
 
     @Override
