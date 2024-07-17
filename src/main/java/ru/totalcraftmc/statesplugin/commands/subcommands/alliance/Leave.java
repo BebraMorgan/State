@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import ru.totalcraftmc.statesplugin.commands.utils.CallsEvents;
 import ru.totalcraftmc.statesplugin.commands.utils.PlayerRequired;
 import ru.totalcraftmc.statesplugin.commands.utils.SubCommand;
+import ru.totalcraftmc.statesplugin.events.alliance.AllianceLeaveEvent;
 
 public class Leave implements SubCommand, PlayerRequired, CallsEvents {
     private Player player;
@@ -15,7 +16,7 @@ public class Leave implements SubCommand, PlayerRequired, CallsEvents {
 
     @Override
     public void execute(String[] args) {
-
+        callEvent(new AllianceLeaveEvent(player));
     }
 
     @Override

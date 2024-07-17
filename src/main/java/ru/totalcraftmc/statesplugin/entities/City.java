@@ -33,7 +33,7 @@ public class City {
     private List<StatePlayer> players = new ArrayList<>();
 
     @OneToMany
-    @JoinTable(name = "city_assistants",
+    @JoinTable(name = "cities_assistants",
             joinColumns = @JoinColumn(name = "city_id"),
             inverseJoinColumns = @JoinColumn(name = "assistant_id"))
     private List<StatePlayer> assistants;

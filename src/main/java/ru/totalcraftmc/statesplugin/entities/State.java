@@ -31,7 +31,7 @@ public class State {
     private StatePlayer leader;
 
     @OneToMany
-    @JoinTable(name = "state_ministers",
+    @JoinTable(name = "states_ministers",
             joinColumns = @JoinColumn(name = "state_id"),
             inverseJoinColumns = @JoinColumn(name = "minister_id"))
     private List<StatePlayer> ministers;

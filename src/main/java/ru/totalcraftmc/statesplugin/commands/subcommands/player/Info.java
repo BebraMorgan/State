@@ -7,12 +7,14 @@ import ru.totalcraftmc.statesplugin.dao.PlayerDAO;
 import ru.totalcraftmc.statesplugin.entities.Balance;
 import ru.totalcraftmc.statesplugin.entities.StatePlayer;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class Info implements SubCommand, PlayerRequired {
     private final PlayerDAO playerDAO = new PlayerDAO();
     private Player player;
 
     @Override
-    public void execute(String[] args) {
+    public void execute(String[] args) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         String name;
         if (args.length < 2) name = player.getName();
         else name = args[1];
@@ -21,6 +23,9 @@ public class Info implements SubCommand, PlayerRequired {
         if (statePlayer == null) {
             player.sendMessage("Игрок не найден");
             return;
+        }
+        if (statePlayer.cant("destroyCity", StatePlayer.class)) {
+            player.sendMessage("Вы не можете уничтожить город");
         }
         StringBuilder info = new StringBuilder();
         Balance balance = statePlayer.getBalance();

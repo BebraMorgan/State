@@ -4,6 +4,7 @@ import org.bukkit.entity.Player;
 import ru.totalcraftmc.statesplugin.commands.utils.CallsEvents;
 import ru.totalcraftmc.statesplugin.commands.utils.PlayerRequired;
 import ru.totalcraftmc.statesplugin.commands.utils.SubCommand;
+import ru.totalcraftmc.statesplugin.events.alliance.AllianceJoinEvent;
 
 public class Join implements SubCommand, PlayerRequired, CallsEvents {
     private Player player;
@@ -15,7 +16,7 @@ public class Join implements SubCommand, PlayerRequired, CallsEvents {
 
     @Override
     public void execute(String[] args) {
-
+        callEvent(new AllianceJoinEvent(args[1], player));
     }
 
     @Override

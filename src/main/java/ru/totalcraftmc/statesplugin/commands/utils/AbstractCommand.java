@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import ru.totalcraftmc.statesplugin.StatesPlugin;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Stream;
@@ -25,7 +26,7 @@ public abstract class AbstractCommand implements CommandExecutor, ExecuteModifie
         commandsStream.forEach(subCommand -> commands.put(subCommand.getName(), subCommand));
     }
 
-    public void execute(CommandSender sender, String[] args) {
+    public void execute(CommandSender sender, String[] args) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         beforeExecute();
         if (args.length < 1) return;
         if (!(sender instanceof Player player)) {
@@ -41,7 +42,12 @@ public abstract class AbstractCommand implements CommandExecutor, ExecuteModifie
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        execute(sender, args);
+        try {
+            execute(sender, args);
+        } catch (ClassNotFoundException | InvocationTargetException | NoSuchMethodException | InstantiationException |
+                 IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
         return true;
     }
 

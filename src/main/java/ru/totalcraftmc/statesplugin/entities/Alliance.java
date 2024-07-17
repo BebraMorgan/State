@@ -26,11 +26,15 @@ public class Alliance {
     private String name;
 
     @OneToMany
-    @JoinTable(name = "alliance_diplomats",
+    @JoinTable(name = "alliances_diplomats",
             joinColumns = @JoinColumn(name = "alliance_id"),
             inverseJoinColumns = @JoinColumn(name = "diplomat_id"))
     private List<StatePlayer> diplomats;
 
     @OneToMany(mappedBy = "alliance")
     private List<State> states;
+
+    public Object getLeader() {
+        return getDiplomats().stream().findFirst().orElse(null);
+    }
 }
