@@ -4,6 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import ru.totalcraftmc.statesplugin.dao.CityDAO;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -25,6 +28,9 @@ public class City {
 
     private String name;
 
+    @OneToMany(mappedBy = "owner")
+    private List<Sector> sectors = new ArrayList<>();
+
     @ManyToOne
     @JoinColumn(name = "state_id", referencedColumnName = "id")
     private State state;
@@ -36,13 +42,15 @@ public class City {
     @JoinTable(name = "cities_assistants",
             joinColumns = @JoinColumn(name = "city_id"),
             inverseJoinColumns = @JoinColumn(name = "assistant_id"))
-    private List<StatePlayer> assistants;
+    private List<StatePlayer> assistants = new ArrayList<>();
 
     private double x;
 
-    private double y;
+    private double z;
 
     @OneToOne
     private StatePlayer mayor;
+
+
 
 }

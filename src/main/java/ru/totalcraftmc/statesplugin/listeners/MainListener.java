@@ -8,7 +8,7 @@ public class MainListener {
 
     public MainListener() {
         Bukkit.getServer().getPluginManager().registerEvents(new PlayerListener(), plugin);
-
+        Bukkit.getServer().getPluginManager().registerEvents(new CityListener(), plugin);
     }
 
 }

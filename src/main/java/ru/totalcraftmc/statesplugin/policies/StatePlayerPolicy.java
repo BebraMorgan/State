@@ -5,7 +5,7 @@ import ru.totalcraftmc.statesplugin.policies.utils.Policy;
 
 public class StatePlayerPolicy extends Policy {
     public boolean createCity(StatePlayer player) {
-        return player.getCity() == null;
+        return player.notResident();
     }
 
     public boolean destroyCity(StatePlayer player) {
@@ -18,6 +18,10 @@ public class StatePlayerPolicy extends Policy {
 
     public boolean assistantManage(StatePlayer player) {
         return player.isMayor();
+    }
+
+    public boolean kickFromCity(StatePlayer player) {
+        return player.isMayor() || player.isAssistant();
     }
 
     public boolean inviteToCity(StatePlayer player) {

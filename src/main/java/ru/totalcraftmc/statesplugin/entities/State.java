@@ -36,6 +36,7 @@ public class State {
             inverseJoinColumns = @JoinColumn(name = "minister_id"))
     private List<StatePlayer> ministers;
 
+    private int color;
 
     @ManyToOne
     private Alliance alliance;

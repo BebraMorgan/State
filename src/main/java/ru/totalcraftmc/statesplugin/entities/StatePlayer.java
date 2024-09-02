@@ -46,8 +46,12 @@ public class StatePlayer {
     }
 
     public boolean isAssistant() {
-        if(notResident()) return false;
+        if (notResident()) return false;
         return city.getAssistants().contains(this);
+    }
+
+    public boolean notAssistant() {
+        return !isAssistant();
     }
 
     public boolean isMayor() {
@@ -59,31 +63,37 @@ public class StatePlayer {
         if (getState() == null) return null;
         return getState().getAlliance();
     }
+
     public boolean isStateLeader() {
         if (getState() == null) return false;
         return getState().getLeader().equals(this);
     }
-    public boolean can(String ability, Object arg) {
+
+    public boolean can(String ability) {
         try {
             Policy policy = (Policy) Class
                     .forName("ru.totalcraftmc.statesplugin.policies."
                             + this.getClass().getSimpleName() + "Policy")
                     .getDeclaredConstructor().newInstance();
-            Method method = policy.getClass().getDeclaredMethod(ability, arg.getClass());
-            return (boolean) method.invoke(policy, arg);
+            Method method = policy.getClass().getDeclaredMethod(ability, this.getClass());
+            return (boolean) method.invoke(policy, this);
         } catch (NoSuchMethodException | ClassNotFoundException | InvocationTargetException | InstantiationException |
                  IllegalAccessException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public boolean cant(String ability, Object arg) {
-        return !can(ability, arg);
+    public boolean cant(String ability) {
+        return !can(ability);
     }
 
     public boolean isMinister() {
         if (getState() == null) return false;
         return getState().getMinisters().contains(this);
+    }
+
+    public boolean notMayor() {
+        return !isMayor();
     }
 }
 

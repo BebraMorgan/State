@@ -2,6 +2,8 @@ name: States
 version: '${project.version}'
 main: ru.totalcraftmc.statesplugin.StatesPlugin
 api-version: '1.19'
+depend:
+  - dynmap
 commands:
   player:
     aliases: p
